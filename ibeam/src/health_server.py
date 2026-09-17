@@ -64,6 +64,6 @@ def new_health_server(port: int, check_status, get_shutdown_status,
             self.wfile.write("Not Ready".encode())
 
     server = HTTPServer(('', port), HealthzHandler)
-    threading.Thread(target=server.serve_forever).start()
+    threading.Thread(target=server.serve_forever, daemon=True).start()
     _LOGGER.info(f'Health server started at port={port}')
     return server
